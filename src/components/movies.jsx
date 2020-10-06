@@ -3,10 +3,12 @@ import { getMovies } from "../services/fakeMovieService";
 import "@fortawesome/free-solid-svg-icons";
 import Like from "../common/like";
 import Pagination from "../common/pagination";
+import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    currentPage: 1,
     pageSize: 4,
   };
 
@@ -23,13 +25,15 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
-  onPageChange = (page) => {
-    console.log(page);
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
   };
 
   render() {
     const { length: count } = this.state.movies;
+    const { pageSize, currentPage, movies: allMovies } = this.state;
     if (count === 0) return <p>There are no movies on the Database</p>;
+    const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
       <React.Fragment>
@@ -46,7 +50,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((movie) => (
+            {movies.map((movie) => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
@@ -72,8 +76,9 @@ class Movies extends Component {
         </table>
         <Pagination
           itemsCount={count} // Inputs
-          pageSize={this.state.pageSize} // Inputs
-          onPageChange={this.onPageChange} // Methods
+          pageSize={pageSize} // Inputs
+          currentPage={currentPage} // Input
+          onPageChange={this.handlePageChange} // Methods
         />
       </React.Fragment>
     );
