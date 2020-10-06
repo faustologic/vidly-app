@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import "@fortawesome/free-solid-svg-icons";
 import Like from "../common/like";
+import Pagination from "../common/pagination";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageSize: 4,
   };
 
   handleLike = (movie) => {
@@ -19,6 +21,10 @@ class Movies extends Component {
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
+  };
+
+  onPageChange = (page) => {
+    console.log(page);
   };
 
   render() {
@@ -64,6 +70,11 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination
+          itemsCount={count} // Inputs
+          pageSize={this.state.pageSize} // Inputs
+          onPageChange={this.onPageChange} // Methods
+        />
       </React.Fragment>
     );
   }
