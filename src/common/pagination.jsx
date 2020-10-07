@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import PropTypes from "prop-types"; // Verification with Proptypes
 import _ from "lodash";
 
 // We install lodash to make easy the iterarion of an array
@@ -30,6 +31,14 @@ const Pagination = (props) => {
       </ul>
     </nav>
   );
+};
+
+// We use the PropTypes props verification, to asure that we can avoid any error on the history of the app web
+Pagination.propTypes = {
+  itemsCount: PropTypes.number.isRequired,
+  pageSize: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
 };
 
 export default Pagination;
