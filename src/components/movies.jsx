@@ -44,15 +44,7 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleSort = (path) => {
-    // ascending and descending function for sorting data
-    const sortColumn = { ...this.state.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
 
@@ -87,10 +79,10 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <h1>My list of Movies.</h1>
           <p>Showing {filtered.length} movies in the Database</p>
           <MoviesTable
             movies={movies}
+            raiseSort={this.props.sortColumn}
             onDelete={this.handleDelete}
             onLike={this.handleLike}
             onSort={this.handleSort}
