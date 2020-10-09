@@ -19,11 +19,11 @@ class TableHeader extends Component {
   };
 
   render() {
-    const { column } = this.props;
+    const { columns } = this.props;
     return (
       <thead>
         <tr>
-          {column.map((column) => (
+          {columns.map((column) => (
             <th
               // Column array object is on the MoviesTables component.
               key={column.path || column.key}
