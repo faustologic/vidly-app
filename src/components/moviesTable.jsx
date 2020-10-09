@@ -12,7 +12,7 @@ class MoviesTable extends Component {
     { key: "delete" },
   ];
   render() {
-    const { movies, onDelete, onLike, sortColumn, onSort } = this.props;
+    const { movies, onDelete, onLike, onSort, sortColumn } = this.props;
 
     return (
       <table className="table">

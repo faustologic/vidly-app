@@ -27,10 +27,6 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (sortColumn) => {
-    this.setState({ sortColumn });
-  };
-
   handleLike = (movie) => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
@@ -46,6 +42,10 @@ class Movies extends Component {
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
+  };
+
+  handleSort = (sortColumn) => {
+    this.setState({ sortColumn });
   };
 
   render() {
