@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // Interface Props
-// column: array
+// columns: array
 // sortColumn: object
 // onSort: function
 
