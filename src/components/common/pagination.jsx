@@ -5,9 +5,7 @@ import _ from "lodash";
 
 // We install lodash to make easy the iterarion of an array
 
-const Pagination = (props) => {
-  const { itemsCount, pageSize, currentPage, onPageChange } = props;
-
+const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   // We make this operation to hide the 1 page when the number of movies occupies just one page.
   const pagesCount = Math.ceil(itemsCount / pageSize);
   if (pagesCount === 1) return null;
