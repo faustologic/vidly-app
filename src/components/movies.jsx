@@ -47,9 +47,9 @@ class Movies extends Component {
   handleSort = (sortColumn) => {
     this.setState({ sortColumn });
 
-    const data = this.state.movies;
-    data.sort((a,b) => a[sortColumn.path])
-    this.setState({movies: data});
+    // const data = this.state.movies;
+    // data.sort((a,b) => a[sortColumn.path])
+    // this.setState({movies: data});
   };
 
   render() {
