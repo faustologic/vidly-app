@@ -12,6 +12,14 @@ body {
   margin-bottom: 30px;
 }
 
+.loginForm__title {
+  margin-bottom: 30px;
+}
+
+.form-group {
+  width: 50%;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
