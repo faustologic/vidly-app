@@ -1,43 +1,64 @@
 import React, { Component } from "react";
+import Input from "./common/input";
+
 class LoginForm extends Component {
   state = {
     account: { username: "", password: "" },
+    errors: {},
   };
+
+  validate = () => {
+    const errors = {};
+
+    if (this.state.account.username.trim() === "")
+      errors.username = "Username is required!";
+    if (this.state.account.password.trim() === "")
+      errors.password = "Password is required!";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+    if (errors) return;
+
     //Call the server
     console.log("Submitted");
   };
 
-  handleChange = (e) => {
+  handleChange = ({ currentTarget: input }) => {
+    // change the value on the inputs sync
     const account = { ...this.state.account };
-    account.username = e.currentTarget.value;
+    account[input.name] = input.value;
     this.setState({ account });
   };
 
   render() {
+    const { account } = this.state;
+
     return (
       <div>
         <h1 className="loginForm__title">Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              autoFocus //this propertie initialize the input
-              value={this.state.account.username}
-              onChange={this.handleChange}
-              id="username"
-              type="text"
-              className="form-control"
-            />
-            <small id="emailHelp" className="form-text text-muted">
-              We'll never share your email with anyone else.
-            </small>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input id="password" type="text" className="form-control" />
-          </div>
+          <Input
+            name="username"
+            label="Username"
+            value={account.username}
+            onChange={this.handleChange}
+          />
+          {/* <small id="emailHelp" className="form-text text-muted">
+            We'll never share your email with anyone else.
+          </small> */}
+          <Input
+            name="password"
+            label="Password"
+            value={account.password}
+            onChange={this.handleChange}
+          />
           <button className="btn btn-primary">Login</button>
         </form>
       </div>
