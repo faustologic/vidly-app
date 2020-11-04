@@ -1,7 +1,6 @@
 import React from "react";
 import Joi from "joi-browser"; // We installed Joi like: npm i joi-browser@13.4
 import Form from "./common/form"; //reusable component
-import Input from "./common/input";
 
 class LoginForm extends Form {
   state = {
@@ -22,32 +21,16 @@ class LoginForm extends Form {
   };
 
   render() {
-    const { data, errors } = this.state;
-
     return (
       <div>
         <h1 className="loginForm__title">Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            name="username"
-            label="Username"
-            value={data.username}
-            onChange={this.handleChange}
-            error={errors.username}
-          />
+          {this.renderInput("username", "Username")}
           {/* <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
           </small> */}
-          <Input
-            name="password"
-            label="Password"
-            value={data.password}
-            onChange={this.handleChange}
-            error={errors.password}
-          />
-          <button disabled={this.validate()} className="btn btn-primary">
-            Login
-          </button>
+          {this.renderInput("password", "Password", "password")}
+          {this.renderButton()}
         </form>
       </div>
     );
