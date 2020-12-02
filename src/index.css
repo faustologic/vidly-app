@@ -16,6 +16,10 @@ body {
   margin-bottom: 30px;
 }
 
+.register__title {
+  margin-bottom: 30px;
+}
+
 .form-group {
   width: 50%;
 }

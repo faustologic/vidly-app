@@ -47,15 +47,15 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
-
-  renderButton() {
+  // This the function for the button on the form
+  renderButton(label) {
     return (
       <button disabled={this.validate()} className="btn btn-primary">
-        Login
+        {label}
       </button>
     );
   }
-
+  // This the function for every input (username & password), type is only for hide the password´s characters
   renderInput(name, label, type) {
     const { data, errors } = this.state;
 

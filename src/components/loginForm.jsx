@@ -26,11 +26,8 @@ class LoginForm extends Form {
         <h1 className="loginForm__title">Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
-          {/* <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small> */}
           {this.renderInput("password", "Password", "password")}
-          {this.renderButton()}
+          {this.renderButton("Login")}
         </form>
       </div>
     );
