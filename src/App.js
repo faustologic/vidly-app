@@ -7,7 +7,7 @@ import MoviesForm from "./components/moviesForm";
 import NavBar from "./components/navBar";
 import NotFound from "./components/notFound";
 import Rentals from "./components/rentals";
-import Register from "./components/register";
+import RegisterForm from "./components/registerForm";
 import "./App.css";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Route path="/login" component={LoginForm} />
           <Route path="/movies" component={Movies} />
           <Route path="/rentals" component={Rentals} />
-          <Route path="/register" component={Register} />
+          <Route path="/register" component={RegisterForm} />
           <Route path="/customers" component={Customers} />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/movies" />

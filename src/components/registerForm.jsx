@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 
-class Register extends Form {
+class RegisterForm extends Form {
   state = {
     data: { username: "", password: "", name: "" },
     errors: {},
@@ -14,6 +14,11 @@ class Register extends Form {
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }),
     password: Joi.string().required().label("Password").min(5).max(10),
     name: Joi.string().required().label("Name"),
+  };
+
+  doSubmit = () => {
+    // Call the server
+    console.log("Submitted!");
   };
 
   render() {
@@ -31,4 +36,4 @@ class Register extends Form {
   }
 }
 
-export default Register;
+export default RegisterForm;
