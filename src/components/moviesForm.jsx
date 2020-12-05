@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import { getGenres } from "../services/fakeGenreService";
-import { getMovies, saveMovie } from "../services/fakeMovieService";
+import { getMovie, saveMovie } from "../services/fakeMovieService";
 
 class MoviesForm extends Form {
   state = {
@@ -39,7 +39,7 @@ class MoviesForm extends Form {
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = getMovies(movieId);
+    const movie = getMovie(movieId);
     if (!movie) return this.props.history.replace("/not-found");
 
     this.setState({ data: this.mapToViewModel(movie) });
@@ -58,6 +58,7 @@ class MoviesForm extends Form {
 
   doSubmit = () => {
     saveMovie(this.state.data);
+    // After we save our new movie we go back to the movies webpage.
     this.props.history.push("/movies");
   };
 
