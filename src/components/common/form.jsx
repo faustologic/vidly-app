@@ -34,6 +34,7 @@ class Form extends Component {
     // errors object should never be null.
     this.setState({ errors: errors || {} });
     if (errors) return;
+    this.doSubmit(); // To activate our submit button on the website
   };
 
   handleChange = ({ currentTarget: input }) => {
