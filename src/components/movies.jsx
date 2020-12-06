@@ -70,27 +70,6 @@ class Movies extends Component {
     const {
       pageSize,
       currentPage,
-      selectedGenre,
-      movies: allMovies,
-      sortColumn,
-    } = this.state;
-
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-        : allMovies;
-
-    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-
-    const movies = paginate(sorted, currentPage, pageSize);
-
-    return { totalCount: filtered.length, data: movies };
-  };
-
-  getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
       sortColumn,
       selectedGenre,
       searchQuery,
@@ -104,11 +83,17 @@ class Movies extends Component {
       );
     else if (selectedGenre && selectedGenre._id)
       filtered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
+
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+
+    const movies = paginate(sorted, currentPage, pageSize);
+
+    return { totalCount: filtered.length, data: movies };
   };
 
   render() {
     const { length: count } = this.state.movies;
-    const { pageSize, currentPage, sortColumn } = this.state;
+    const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
     const { totalCount, data: movies } = this.getPagedRender();
     if (count === 0) return <p>There are no movies on the Database</p>;
 
@@ -127,7 +112,7 @@ class Movies extends Component {
             <button className="btn btn-primary btn-sm mb-2">New Movie</button>
           </Link>
           <p>Showing {totalCount} movies in the Database</p>
-          <SearchBox onChange={this.handleSearch} value={this.searchQuery} />
+          <SearchBox onChange={this.handleSearch} value={searchQuery} />
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}
