@@ -1,7 +1,8 @@
 import React from "react";
 import Joi from "joi-browser"; // We installed Joi like: npm i joi-browser@13.4
 import Form from "./common/form"; //reusable component
-import { login } from "../services/authService";
+import auth from "../services/authService";
+import { toast } from "react-toastify";
 
 class LoginForm extends Form {
   state = {
@@ -20,9 +21,10 @@ class LoginForm extends Form {
     try {
       const { data } = this.state;
       // jwt = Json web token
-      const { data: jwt } = await login(data.username, data.password);
-      localStorage.setItem("token", jwt);
+      await auth.login(data.username, data.password);
+
       window.location = "/";
+      toast.success("Welcome back " + data.username); //fix the problem
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
