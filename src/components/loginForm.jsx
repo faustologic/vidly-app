@@ -3,6 +3,7 @@ import Joi from "joi-browser"; // We installed Joi like: npm i joi-browser@13.4
 import Form from "./common/form"; //reusable component
 import auth from "../services/authService";
 import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 class LoginForm extends Form {
   state = {
@@ -28,6 +29,7 @@ class LoginForm extends Form {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.username = ex.response.data;
+        toast.error("There's a problem with your username or password!"); // Notification extra!
         this.setState({ errors });
       }
     }
