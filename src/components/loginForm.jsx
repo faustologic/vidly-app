@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser"; // We installed Joi like: npm i joi-browser@13.4
 import Form from "./common/form"; //reusable component
 import auth from "../services/authService";
-import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 
 class LoginForm extends Form {
   state = {
@@ -22,9 +22,8 @@ class LoginForm extends Form {
       const { data } = this.state;
       // jwt = Json web token
       await auth.login(data.username, data.password);
-
-      window.location = "/";
-      toast.success("Welcome back " + data.username); //fix the problem
+      const { state } = this.props.location;
+      window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -35,6 +34,8 @@ class LoginForm extends Form {
   };
 
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />;
+
     return (
       <div>
         <h1 className="loginForm__title">Login</h1>
