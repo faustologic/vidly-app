@@ -1,8 +1,7 @@
 import http from "./httpService"; // <- This module is the boss.
-import { apiUrl } from "../config.json";
 import jwtDecode from "jwt-decode";
 
-const apiEndpoint = apiUrl + "/auth";
+const apiEndpoint = "/auth";
 const tokenKey = "token";
 
 //Bi-directional dependecies
